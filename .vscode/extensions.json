@@ -1,6 +1,7 @@
 {
 	"recommendations": [
 		"ms-vscode.cpptools",
-		"entan-gl.cc65-vice"
+		"entan-gl.cc65-vice",
+		"sharpninja.cc65"
 	]
 }

@@ -17,6 +17,8 @@ sudo apt-get install cc65
 
 Open in VS Code and install recommended extension.
 
+Probably need powershell...
+https://docs.microsoft.com/en-us/powershell/scripting/install/install-ubuntu?view=powershell-7.2
 
 Not sure if I had a typo in my header or I have to import sudo apt-get install clang
 
