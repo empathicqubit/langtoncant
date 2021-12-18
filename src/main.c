@@ -1,10 +1,38 @@
 #include <stdio.h>
 #define BYTE unsigned char
 
+// bit-mapped graphics memory is located $2000-$3FFF (8192-16383) 
+// and that the video RAM lies at $0400-$07FF (1024-2047). 
+// This makes it impossible to work with text and graphics at the same time
+
+// The C heap is located at the end of the program and grows towards the C runtime stack.
+
+// https://cc65.github.io/doc/c64.html#ss4.1
+// The C runtime stack is located at $CFFF (53247) and growing downwards.
+// Should be plenty of stack space between the top of the graphics memory
+
+
 int i;
+int highresNr;
+int nrOfColors;
+BYTE foo;
 int main(void) {
-    printf("Hello ant");
-    while (1) 
+    // Hi-res is turned on by setting bits 5 and 6 (bit 6 must be set in any event) 
+    // of register 17 of the VIC and clearing bit 4 of register 22. 
+    
+    *(BYTE*)0xd011 = *(BYTE*)0xd011 | 0xb0 ; // Graphics on
+    *(BYTE*)0xd016 = *(BYTE*)0xd016 & 240; //Multi color off
+    *(BYTE*)0xd018 = *(BYTE*)0xd018 | 8 ; // Graphics to $2000
+
+    nrOfColors = 1000;
+
+    return 0;
+    for (i =0;i< nrOfColors; i++)
+    {
+        int addr = 0x0400+i;
+        *(BYTE*)(addr) = 0; 
+    }
+    while (0) 
     {
         i++;
         *(BYTE*)0xd020 = i;
@@ -13,5 +41,4 @@ int main(void) {
             i = 0;
     }
 
-    return 0;
 }
