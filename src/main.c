@@ -13,9 +13,6 @@
 
 
 int i;
-int highresNr;
-int nrOfColors;
-BYTE foo;
 int main(void) {
     // Hi-res is turned on by setting bits 5 and 6 (bit 6 must be set in any event) 
     // of register 17 of the VIC and clearing bit 4 of register 22. 
@@ -24,21 +21,22 @@ int main(void) {
     *(BYTE*)0xd016 = *(BYTE*)0xd016 & 240; //Multi color off
     *(BYTE*)0xd018 = *(BYTE*)0xd018 | 8 ; // Graphics to $2000
 
-    nrOfColors = 1000;
+    // Clear memory
+    for (i =0;i< 8000; i++)
+    {
+        *(BYTE*)(0x2000+i) = 0; 
+    }
+
+    // Clear colors 
+    for (i =0;i< 1000; i++)
+    {
+        *(BYTE*)(0x400+i) = 0; 
+    }
+    while (1) {
+
+    }
+
 
     return 0;
-    for (i =0;i< nrOfColors; i++)
-    {
-        int addr = 0x0400+i;
-        *(BYTE*)(addr) = 0; 
-    }
-    while (0) 
-    {
-        i++;
-        *(BYTE*)0xd020 = i;
-        *(BYTE*)0xd021 = i+1;
-        if (i > 254)
-            i = 0;
-    }
 
 }
