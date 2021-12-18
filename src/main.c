@@ -4,10 +4,6 @@ short i;
 short x;
 BYTE y;
 BYTE direction; 
-short ra;
-BYTE ba;
-BYTE ma;
-short sa;
 short ad;
 
 void setHiRes() {
@@ -33,31 +29,19 @@ void setAndClearHiRes(){
 }
 
 BYTE isPositionWhite() {
-    ra = (320 * (BYTE)(y/8)) + (y & 7);
-    ba = 8 * (BYTE)(x/8);
-    ma = 1 << ((7-(x & 7)));
-    sa = 0x2000;
-    ad = sa+ra+ba;
-    return *(BYTE*)(ad) & ma;
+    ad = 0x2000+(320 * (BYTE)(y/8)) + (y & 7)+8 * (BYTE)(x/8);
+    return *(BYTE*)(ad) & 1 << ((7-(x & 7)));
 }
 
 // https://archive.org/details/The_Graphics_Book_for_the_Commodore_64/page/n129/
 void setPositionWhite() {
-    ra = (320 * (y/8)) + (y & 7);
-    ba = 8 * (short)(x/8);
-    ma = 1 << ((7-(x & 7)));
-    sa = 0x2000;
-    ad = sa+ra+ba;
-    *(short*)(ad) = *(short*)(ad) | ma;
+    ad = 0x2000+(320 * (y/8)) + (y & 7)+8 * (short)(x/8);
+    *(short*)(ad) = *(short*)(ad) | 1 << ((7-(x & 7)));
 }
 
 void setPositionBlack() {
-    ra = 320 * (y/8) + (y & 7);
-    ba = 8 * (short)(x/8);
-    ma = (1 << ((7-(x & 7))));
-    sa = 0x2000;
-    ad = sa+ra+ba;
-    *(short*)(ad) = (*(short*)(ad)) & ~ma;
+    ad = 0x2000+320 * (y/8) + (y & 7)+8 * (short)(x/8);
+    *(short*)(ad) = (*(short*)(ad)) & ~(1 << ((7-(x & 7))));
 }
 
 void moveForward() {
