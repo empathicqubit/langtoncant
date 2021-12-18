@@ -34,7 +34,7 @@ void setAndClearHiRes(void) {
     // Clear colors 
     for (i =0;i< 1000; i++)
     {
-        *(BYTE*)(0x400+i) = 0x0F; 
+        *(BYTE*)(0x400+i) = 0xF0; 
     }
 }
 
@@ -44,18 +44,28 @@ int isPositionWhite(long x, int y)
     return 0; // 0 er false...
 }
 
-// https://archive.org/details/The_Graphics_Book_for_the_Commodore_64/page/n129/
-void setPositionBlack(unsigned short x, BYTE y)
+int power(int base, int exponent)
 {
-    int ra = 320 * (int)(y/8) + (y & 7);
-    int ba = 8 * (int)(x/8);
-    int ma = 2^(7-(x & 7));
-    int sa = 0x2000;
-    int ad = sa+ra+ba;
-    *(BYTE*)(ad) = *(BYTE*)(ad) | ma;
+    int result=1;
+    for (exponent; exponent>0; exponent--)
+    {
+        result = result * base;
+    }
+    return result;
 }
 
-void setPositionWhite(long x, int y)
+// https://archive.org/details/The_Graphics_Book_for_the_Commodore_64/page/n129/
+void setPositionWhite(unsigned short x, BYTE y)
+{
+    unsigned short ra = (320 * (BYTE)(y/8)) + (y & 7);
+    unsigned short ba = 8 * (BYTE)(x/8);
+    unsigned short ma = power(2,(7-(x & 7)));
+    unsigned short sa = 0x2000;
+    unsigned short ad = sa+ra+ba;
+    *(unsigned short*)(ad) = *(unsigned short*)(ad) | ma;
+}
+
+void setPositionBlack(long x, int y)
 {
     
 }
@@ -65,10 +75,9 @@ void setPositionWhite(long x, int y)
 int main(void) {
     x = 160;
     y = 100;
-    printf("%d", direction);
     setAndClearHiRes();
     while (1) {
-        setPositionBlack(x,y);
+        setPositionWhite(x,y);
         x = x+1;
         y = y + 1;
     }
