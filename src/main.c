@@ -1,3 +1,4 @@
+#include <stdio.h>
 #define BYTE unsigned char
 
 short i;
@@ -24,13 +25,13 @@ void clearHiRes() {
 }
 
 void setAndClearHiRes(){
-    setHiRes();
     clearHiRes();
+    setHiRes();
 }
 
 BYTE isPositionWhite() {
     ad = 0x2000+(320 * (BYTE)(y/8)) + (y & 7)+8 * (BYTE)(x/8);
-    return *(BYTE*)(ad) & 1 << ((7-(x & 7)));
+    return *(short*)(ad) & 1 << ((7-(x & 7)));
 }
 
 // https://archive.org/details/The_Graphics_Book_for_the_Commodore_64/page/n129/
@@ -68,6 +69,7 @@ void makeMove() {
 }
 
 int main(void) {
+    printf("Please wait will the graphics memory is cleaning up...");
     setAndClearHiRes();
     x = 160;
     y = 100;
