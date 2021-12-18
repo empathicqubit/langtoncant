@@ -38,12 +38,6 @@ void setAndClearHiRes(void) {
     }
 }
 
-// need to think
-int isPositionBlack(long x, int y)
-{
-    return 0; 
-}
-
 int power2(int exponent)
 {
     int result=1;
@@ -53,6 +47,19 @@ int power2(int exponent)
     }
     return result;
 }
+
+// need to think
+BYTE isPositionBlack(unsigned short x, BYTE y)
+{
+    unsigned short ra = (320 * (BYTE)(y/8)) + (y & 7);
+    unsigned short ba = 8 * (BYTE)(x/8);
+    unsigned short ma = 255 - power2((7-(x & 7)));
+    unsigned short sa = 0x2000;
+    unsigned short ad = sa+ra+ba;
+    return 1;
+//    return *(BYTE*)(ad) & ma;
+}
+
 
 // https://archive.org/details/The_Graphics_Book_for_the_Commodore_64/page/n129/
 void setPositionWhite(unsigned short x, BYTE y)
@@ -76,30 +83,37 @@ void setPositionBlack(unsigned short x, BYTE y)
    
 }
 
+void makeMove() {
+    if (isPositionBlack(x,y)) {
+        setPositionWhite(x,y);
+        direction = direction - 64;
+    } else {
+        setPositionBlack(x,y);
+        direction = direction + 64;
+    }
+}
 
 
 unsigned short line;
 int main(void) {
     x = 160;
     y = 100;
+    direction = 0;
     setAndClearHiRes();
-    for (line = 0;line<50;line++)
+
+    while(1)
     {
-        setPositionWhite(x,y);
-        x = x+1;
-        y = y + 1;
+        if (direction == 0) {
+            x = x+1;
+        } else if (direction == 64) {
+            y = y +1;
+        } else if (direction == 128) {
+            x = x-1;
+        } else {
+            y = y -1;
+        }
+        makeMove();
     }
-
-    x = 160;
-    y = 100;
-    for (line = 0;line<50;line++)
-    {
-        setPositionBlack(x,y);
-        x = x+1;
-        y = y + 1;
-    }
-
-
 
     return 0;
 
