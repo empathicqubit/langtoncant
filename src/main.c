@@ -38,10 +38,10 @@ void setAndClearHiRes(void) {
     }
 }
 
-int isPositionWhite(long x, int y)
+// need to think
+int isPositionBlack(long x, int y)
 {
-    
-    return 0; // 0 er false...
+    return 0; 
 }
 
 int power2(int exponent)
@@ -92,7 +92,6 @@ int main(void) {
 
     x = 160;
     y = 100;
-    setAndClearHiRes();
     for (line = 0;line<50;line++)
     {
         setPositionBlack(x,y);
