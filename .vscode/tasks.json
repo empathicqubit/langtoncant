@@ -6,7 +6,7 @@
 			"type": "shell",
 			"command": "mkdir out"
 		},
-			{
+		{
 			"label": "Build program",
 			"type": "shell",
 			"command": "cl65 src/main.c -o out/program.c64"
@@ -19,7 +19,8 @@
 		{
 			"label": "Build & run program",
 			"type": "shell",
-			"command": "cl65 src/main.c -o out/program.c64 && x64sc.exe out/program.c64"
+			"command": "cl65 src/main.c -o out/program.c64 && x64sc.exe out/program.c64",
+			"problemMatcher": []
 		}
 	]
 }
