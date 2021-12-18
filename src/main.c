@@ -13,7 +13,7 @@
 
 
 unsigned short i;
-BYTE x; // maybe if the ant does not go tooo far it could be an int..
+unsigned short x; // maybe if the ant does not go tooo far it could be an int..
 BYTE y;
 BYTE direction; // 0 = right, 64 = up, 128 = left, 192 = down
 void setAndClearHiRes(void) {
@@ -34,7 +34,7 @@ void setAndClearHiRes(void) {
     // Clear colors 
     for (i =0;i< 1000; i++)
     {
-        *(BYTE*)(0x400+i) = 0; 
+        *(BYTE*)(0x400+i) = 0x0F; 
     }
 }
 
@@ -44,9 +44,13 @@ int isPositionWhite(long x, int y)
     return 0; // 0 er false...
 }
 
-void setPositionBlack(long x, int y)
+void setPositionBlack(unsigned short x, BYTE y)
 {
-    
+    int ra = 320 * (int)(y/8) + (y & 7);
+    int ba = 8 * (int)(x/8);
+    int ma = 2^(7-(x & 7));
+    int ad = ma+ra+ba;
+    *(BYTE*)(ad) = *(BYTE*)(ad) | ma;
 }
 
 void setPositionWhite(long x, int y)
@@ -62,8 +66,9 @@ int main(void) {
     printf("%d", direction);
     setAndClearHiRes();
     while (1) {
-        
-
+        setPositionBlack(x,y);
+        x = x+1;
+        y = y + 1;
     }
 
 
