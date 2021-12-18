@@ -7,7 +7,6 @@ I build and run with build tasks, gave up on make files.
 
 Install Vice emulator
 ```powershell
-choco install winvice
 choco install --version 3.5.2021010401 winvice-nightly
 ```
 
