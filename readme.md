@@ -50,3 +50,5 @@ https://github.com/empathicqubit/vscode-cc65-debugger/tree/master/src/__tests__/
 https://archive.org/details/The_Graphics_Book_for_the_Commodore_64/page/n25/mode/2up
 
 http://www.appleoldies.ca/cc65/docs/shr/shrworld.pd
+
+https://archive.org/details/The_Graphics_Book_for_the_Commodore_64/page/n59
