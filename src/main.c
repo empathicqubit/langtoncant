@@ -27,13 +27,6 @@ void clearHiRes() {
     }
 }
 
-void fillHiRes() {
-    for (i =0;i< 8000; i++)
-    {
-        *(BYTE*)(0x2000+i) = 0xff; 
-    }
-}
-
 void setAndClearHiRes(){
     setHiRes();
     clearHiRes();
@@ -79,20 +72,12 @@ void moveForward() {
     }
 }
 
-void turnLeft(){
-    direction = direction + 64;
-}
-
-void turnRight(){
-    direction = direction - 64;
-}
-
 void makeMove() {
     if (isPositionWhite()) {
-        turnRight();
+        direction = direction - 64;
         setPositionBlack();
    } else {
-        turnLeft(); 
+        direction = direction + 64;
         setPositionWhite();
     }
     moveForward();
