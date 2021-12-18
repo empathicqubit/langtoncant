@@ -69,7 +69,9 @@ void makeMove() {
 }
 
 int main(void) {
-    printf("Please wait will the graphics memory is cleaning up...");
+    for (i = 0;i<12;i++) { printf("\n"); }
+    printf("Please wait for ant ...\n");
+    for (i = 0;i<12;i++) { printf("\n"); }
     setAndClearHiRes();
     x = 160;
     y = 100;
