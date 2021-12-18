@@ -6,6 +6,7 @@ Install Vice emulator
 In PowerShell on Windows, as... The GUI does not work in WSL2 yet.
 ```powershell
 choco install winvice
+choco install --version 3.5.2021010401 winvice-nightly
 ```
 Install cc65 in WSL2
 
