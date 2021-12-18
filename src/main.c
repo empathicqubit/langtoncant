@@ -1,16 +1,21 @@
-#include <stdio.h>
 #define BYTE unsigned char
 
 short i;
 short x;
-short y;
+BYTE y;
 BYTE direction; 
-void setHiRes(void) {
+short ra;
+BYTE ba;
+BYTE ma;
+short sa;
+short ad;
+
+void setHiRes() {
     *(BYTE*)0xd011 = *(BYTE*)0xd011 | 0xb0 ; // Graphics on
     *(BYTE*)0xd016 = *(BYTE*)0xd016 & 240; //Multi color off
     *(BYTE*)0xd018 = *(BYTE*)0xd018 | 8 ; // Graphics to $2000
 }
-void clearHiRes(void) {
+void clearHiRes() {
     for (i =0;i< 8000; i++)
     {
         *(BYTE*)(0x2000+i) = 0; 
@@ -22,47 +27,43 @@ void clearHiRes(void) {
     }
 }
 
-void fillHiRes(void) {
+void fillHiRes() {
     for (i =0;i< 8000; i++)
     {
         *(BYTE*)(0x2000+i) = 0xff; 
     }
 }
 
-
 void setAndClearHiRes(){
     setHiRes();
     clearHiRes();
 }
 
-BYTE isPositionWhite(short x, BYTE y)
-{
-    short ra = (320 * (BYTE)(y/8)) + (y & 7);
-    BYTE ba = 8 * (BYTE)(x/8);
-    BYTE ma = 1 << ((7-(x & 7)));
-    short sa = 0x2000;
-    short ad = sa+ra+ba;
+BYTE isPositionWhite() {
+    ra = (320 * (BYTE)(y/8)) + (y & 7);
+    ba = 8 * (BYTE)(x/8);
+    ma = 1 << ((7-(x & 7)));
+    sa = 0x2000;
+    ad = sa+ra+ba;
     return *(BYTE*)(ad) & ma;
 }
 
 // https://archive.org/details/The_Graphics_Book_for_the_Commodore_64/page/n129/
-void setPositionWhite(short x, short y)
-{
-    short ra = (320 * (short)(y/8)) + (y & 7);
-    BYTE ba = 8 * (short)(x/8);
-    BYTE ma = 1 << ((7-(x & 7)));
-    short sa = 0x2000;
-    short ad = sa+ra+ba;
+void setPositionWhite() {
+    ra = (320 * (y/8)) + (y & 7);
+    ba = 8 * (short)(x/8);
+    ma = 1 << ((7-(x & 7)));
+    sa = 0x2000;
+    ad = sa+ra+ba;
     *(short*)(ad) = *(short*)(ad) | ma;
 }
 
-void setPositionBlack(short x, short y)
-{
-    short ra = (320 * (short)(y/8)) + (y & 7);
-    BYTE ba = 8 * (short)(x/8);
-    BYTE ma = (1 << ((7-(x & 7))));
-    short sa = 0x2000;
-    short ad = sa+ra+ba;
+void setPositionBlack() {
+    ra = 320 * (y/8) + (y & 7);
+    ba = 8 * (short)(x/8);
+    ma = (1 << ((7-(x & 7))));
+    sa = 0x2000;
+    ad = sa+ra+ba;
     *(short*)(ad) = (*(short*)(ad)) & ~ma;
 }
 
@@ -86,14 +87,13 @@ void turnRight(){
     direction = direction - 64;
 }
 
-
 void makeMove() {
-    if (isPositionWhite(x,y)) {
+    if (isPositionWhite()) {
         turnRight();
-        setPositionBlack(x,y);
+        setPositionBlack();
    } else {
         turnLeft(); 
-        setPositionWhite(x,y);
+        setPositionWhite();
     }
     moveForward();
 }
@@ -103,7 +103,7 @@ int main(void) {
     x = 160;
     y = 100;
     direction = 0;
-    while(1)
+    while(x > 0 && x < 320 && y > 0 && y < 200)
     {
        makeMove();
     }
