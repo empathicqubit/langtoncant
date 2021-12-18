@@ -8,7 +8,7 @@ This lets me run with CTRL+SHIFT+P, but I have given up any smoother workflows w
 
 ![image](https://user-images.githubusercontent.com/88324093/146642839-ee385473-0e2e-40fc-993f-e62c057d0eb8.png)
 
-
+One can also make many ants and see what they do https://twitter.com/bjartnes/status/1472318167678693383
 
 # Getting started
 
