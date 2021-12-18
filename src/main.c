@@ -44,12 +44,14 @@ int isPositionWhite(long x, int y)
     return 0; // 0 er false...
 }
 
+// https://archive.org/details/The_Graphics_Book_for_the_Commodore_64/page/n129/
 void setPositionBlack(unsigned short x, BYTE y)
 {
     int ra = 320 * (int)(y/8) + (y & 7);
     int ba = 8 * (int)(x/8);
     int ma = 2^(7-(x & 7));
-    int ad = ma+ra+ba;
+    int sa = 0x2000;
+    int ad = sa+ra+ba;
     *(BYTE*)(ad) = *(BYTE*)(ad) | ma;
 }
 
