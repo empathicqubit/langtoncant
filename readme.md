@@ -1,4 +1,10 @@
-A port of https://github.com/bjartwolf/ant to the high level language c
+A work in progress port of https://github.com/bjartwolf/ant to the high level language c
+
+This lets me run with CTRL+SHIFT+P, but I have given up any smoother workflows with debuggers for now...
+
+![image](https://user-images.githubusercontent.com/88324093/146642839-ee385473-0e2e-40fc-993f-e62c057d0eb8.png)
+
+
 
 # Getting started
 
