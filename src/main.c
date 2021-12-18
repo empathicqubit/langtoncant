@@ -12,10 +12,14 @@
 // Should be plenty of stack space between the top of the graphics memory
 
 
-int i;
-int main(void) {
+unsigned short i;
+BYTE x; // maybe if the ant does not go tooo far it could be an int..
+BYTE y;
+BYTE direction; // 0 = right, 64 = up, 128 = left, 192 = down
+void setAndClearHiRes(void) {
     // Hi-res is turned on by setting bits 5 and 6 (bit 6 must be set in any event) 
     // of register 17 of the VIC and clearing bit 4 of register 22. 
+
     
     *(BYTE*)0xd011 = *(BYTE*)0xd011 | 0xb0 ; // Graphics on
     *(BYTE*)0xd016 = *(BYTE*)0xd016 & 240; //Multi color off
@@ -32,7 +36,33 @@ int main(void) {
     {
         *(BYTE*)(0x400+i) = 0; 
     }
+}
+
+int isPositionWhite(long x, int y)
+{
+    
+    return 0; // 0 er false...
+}
+
+void setPositionBlack(long x, int y)
+{
+    
+}
+
+void setPositionWhite(long x, int y)
+{
+    
+}
+
+
+
+int main(void) {
+    x = 160;
+    y = 100;
+    printf("%d", direction);
+    setAndClearHiRes();
     while (1) {
+        
 
     }
 
@@ -40,3 +70,4 @@ int main(void) {
     return 0;
 
 }
+
