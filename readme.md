@@ -28,3 +28,9 @@ cl65 hello.c -o hello.prg
 x64.exe hello.prg 
 ```
 to run hello world
+
+
+Useful https://sta.c64.org/cbm64mem.html
+
+Using template from
+https://github.com/empathicqubit/vscode-cc65-debugger/tree/master/src/__tests__/c-project-template
