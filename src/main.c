@@ -65,22 +65,41 @@ void setPositionWhite(unsigned short x, BYTE y)
     *(unsigned short*)(ad) = *(unsigned short*)(ad) | ma;
 }
 
-void setPositionBlack(long x, int y)
+void setPositionBlack(unsigned short x, BYTE y)
 {
-    
+    unsigned short ra = (320 * (BYTE)(y/8)) + (y & 7);
+    unsigned short ba = 8 * (BYTE)(x/8);
+    unsigned short ma = 255 - power(2,(7-(x & 7)));
+    unsigned short sa = 0x2000;
+    unsigned short ad = sa+ra+ba;
+    *(unsigned short*)(ad) = *(unsigned short*)(ad) & ma;
+   
 }
 
 
 
+unsigned short line;
 int main(void) {
     x = 160;
     y = 100;
     setAndClearHiRes();
-    while (1) {
+    for (line = 0;line<50;line++)
+    {
         setPositionWhite(x,y);
         x = x+1;
         y = y + 1;
     }
+
+    x = 160;
+    y = 100;
+    setAndClearHiRes();
+    for (line = 0;line<50;line++)
+    {
+        setPositionBlack(x,y);
+        x = x+1;
+        y = y + 1;
+    }
+
 
 
     return 0;
