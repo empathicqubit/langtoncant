@@ -1,5 +1,9 @@
-A work in progress port of https://github.com/bjartwolf/ant to the high level language c
+A port of https://github.com/bjartwolf/ant to the high level language c
 
+![image](https://user-images.githubusercontent.com/1174441/146655172-65d4ebde-5f03-42ce-a50f-05d732cf0393.png)
+
+
+Installation instructions on how to set up dev env, nothing perfect, but...
 This lets me run with CTRL+SHIFT+P, but I have given up any smoother workflows with debuggers for now...
 
 ![image](https://user-images.githubusercontent.com/88324093/146642839-ee385473-0e2e-40fc-993f-e62c057d0eb8.png)
