@@ -44,12 +44,12 @@ int isPositionWhite(long x, int y)
     return 0; // 0 er false...
 }
 
-int power(int base, int exponent)
+int power2(int exponent)
 {
     int result=1;
     for (exponent; exponent>0; exponent--)
     {
-        result = result * base;
+        result = result * 2;
     }
     return result;
 }
@@ -59,7 +59,7 @@ void setPositionWhite(unsigned short x, BYTE y)
 {
     unsigned short ra = (320 * (BYTE)(y/8)) + (y & 7);
     unsigned short ba = 8 * (BYTE)(x/8);
-    unsigned short ma = power(2,(7-(x & 7)));
+    unsigned short ma = power2((7-(x & 7)));
     unsigned short sa = 0x2000;
     unsigned short ad = sa+ra+ba;
     *(unsigned short*)(ad) = *(unsigned short*)(ad) | ma;
@@ -69,7 +69,7 @@ void setPositionBlack(unsigned short x, BYTE y)
 {
     unsigned short ra = (320 * (BYTE)(y/8)) + (y & 7);
     unsigned short ba = 8 * (BYTE)(x/8);
-    unsigned short ma = 255 - power(2,(7-(x & 7)));
+    unsigned short ma = 255 - power2((7-(x & 7)));
     unsigned short sa = 0x2000;
     unsigned short ad = sa+ra+ba;
     *(unsigned short*)(ad) = *(unsigned short*)(ad) & ma;
