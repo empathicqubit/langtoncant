@@ -32,5 +32,6 @@ to run hello world
 
 Useful https://sta.c64.org/cbm64mem.html
 
-Using template from
+Using template from, but gave up on it
+
 https://github.com/empathicqubit/vscode-cc65-debugger/tree/master/src/__tests__/c-project-template

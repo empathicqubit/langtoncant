@@ -1,9 +1,7 @@
 {
 	"recommendations": [
-//		"ms-vscode.cpptools",
-		"entan-gl.cc65-vice",
-//		"sharpninja.cc65",
-		"llvm-vs-code-extensions.vscode-clangd"
+		"llvm-vs-code-extensions.vscode-clangd",
+		"sharpninja.cc65"
 	],
-	"unwantedRecommendations": ["sharpninja.cc65", "tlgkccampbell.code-ca65"]
+	"unwantedRecommendations": ["tlgkccampbell.code-ca65"]
 }
