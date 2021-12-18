@@ -6,6 +6,9 @@ short x;
 BYTE y;
 BYTE direction; 
 short ad;
+short x2;
+BYTE y2;
+BYTE direction2; 
 
 void setHiRes() {
     *(BYTE*)0xd011 = *(BYTE*)0xd011 | 0xb0 ; // Graphics on
@@ -34,7 +37,6 @@ BYTE isPositionWhite() {
     return *(short*)(ad) & 1 << ((7-(x & 7)));
 }
 
-// https://archive.org/details/The_Graphics_Book_for_the_Commodore_64/page/n129/
 void setPositionWhite() {
     ad = 0x2000+(320 * (y/8)) + (y & 7)+8 * (x/8);
     *(short*)(ad) = *(short*)(ad) | 1 << ((7-(x & 7)));
@@ -67,18 +69,60 @@ void makeMove() {
     }
     moveForward();
 }
+BYTE isPositionWhite2() {
+    ad = 0x2000+(320 * (BYTE)(y2/8)) + (y2 & 7)+8 * (BYTE)(x2/8);
+    return *(short*)(ad) & 1 << ((7-(x2 & 7)));
+}
+
+void setPositionWhite2() {
+    ad = 0x2000+(320 * (y2/8)) + (y2 & 7)+8 * (x2/8);
+    *(short*)(ad) = *(short*)(ad) | 1 << ((7-(x2 & 7)));
+}
+
+void setPositionBlack2() {
+    ad = 0x2000+320 * (y2/8) + (y2 & 7)+8 * (x2/8);
+    *(short*)(ad) = (*(short*)(ad)) & ~(1 << ((7-(x2 & 7))));
+}
+
+void moveForward2() {
+    if (direction2 == 0) {
+        x2 = x2+1;
+    } else if (direction2 == 64) {
+        y2 = y2+1;
+    } else if (direction2 == 128) {
+        x2 = x2-1;
+    } else if (direction2 == 192) {
+        y2 = y2-1;
+    }
+}
+
+void makeMove2() {
+    if (isPositionWhite2()) {
+        direction2 = direction2 - 64;
+        setPositionBlack2();
+   } else {
+        direction2 = direction2 + 64;
+        setPositionWhite2();
+    }
+    moveForward2();
+}
+
 
 int main(void) {
     for (i = 0;i<12;i++) { printf("\n"); }
     printf("Please wait for ant ...\n");
     for (i = 0;i<12;i++) { printf("\n"); }
     setAndClearHiRes();
+    x2 = 159;
+    y2 = 100;
+    direction2 = 192;
     x = 160;
     y = 100;
     direction = 0;
     while(x > 0 && x < 320 && y > 0 && y < 200)
     {
        makeMove();
+       makeMove2();
     }
     return 0;
 }
