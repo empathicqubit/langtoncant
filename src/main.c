@@ -113,7 +113,7 @@ int main(void) {
     printf("Please wait for ant ...\n");
     for (i = 0;i<12;i++) { printf("\n"); }
     setAndClearHiRes();
-    x2 = 159;
+    x2 = 150;
     y2 = 100;
     direction2 = 192;
     x = 160;
