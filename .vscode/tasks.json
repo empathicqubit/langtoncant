@@ -17,9 +17,9 @@
 			"command": " x64sc.exe out/program.c64"
 		},
 		{
-			"label": "Build & run program",
+			"label": "Build & run program with optimization",
 			"type": "shell",
-			"command": "cl65 src/main.c -o out/program.c64 && x64sc.exe out/program.c64",
+			"command": "cl65 src/main.c -o out/program.c64 -Oi && x64sc.exe out/program.c64",
 			"problemMatcher": []
 		}
 	]

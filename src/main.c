@@ -30,18 +30,18 @@ void setAndClearHiRes(){
 }
 
 BYTE isPositionWhite() {
-    ad = 0x2000+(320 * (BYTE)(y >> 3)) + (y & 7)+8 * (BYTE)(x/8);
+    ad = 0x2000+(320 * (BYTE)(y >> 3)) + (y & 7)+8 * (BYTE)(x>>3);
     return *(short*)(ad) & 1 << ((7-(x & 7)));
 }
 
 // https://archive.org/details/The_Graphics_Book_for_the_Commodore_64/page/n129/
 void setPositionWhite() {
-    ad = 0x2000+(320 * (y >> 3)) + (y & 7)+8 * (x/8);
+    ad = 0x2000+(320 * (y >> 3)) + (y & 7)+8 * (x>>3);
     *(short*)(ad) = *(short*)(ad) | 1 << ((7-(x & 7)));
 }
 
 void setPositionBlack() {
-    ad = 0x2000+320 * (y >> 3) + (y & 7)+8 * (x/8);
+    ad = 0x2000+320 * (y >> 3) + (y & 7)+8 * (x>>3);
     *(short*)(ad) = (*(short*)(ad)) & ~(1 << ((7-(x & 7))));
 }
 
