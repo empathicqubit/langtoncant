@@ -30,7 +30,7 @@ void setAndClearHiRes(){
 }
 
 BYTE isPositionWhite() {
-    ad = 0x2000+(320 * (BYTE)(y >> 3)) + (y & 7)+8 * (BYTE)(x>>3);
+    ad = 0x2000+(320 * (BYTE)(y >> 3)) + (y & 7)+ (x&(0xfff8));
     return *(short*)(ad) & 1 << ((7-(x & 7)));
 }
 
@@ -74,7 +74,7 @@ int main(void) {
     printf("Please wait for ant ...\n");
     for (i = 0;i<12;i++) { printf("\n"); }
     setAndClearHiRes();
-    x = 300;
+    x = 270;
     y = 100;
     direction = 0;
     while(x > 0 && x < 320 && y > 0 && y < 200)
