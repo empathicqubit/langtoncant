@@ -31,6 +31,10 @@ void setAndClearHiRes(){
 }
 
 void calcAdress(){
+    /// Refactored it a bit, it had stuff like 320*FLOOR(Y/8) which is made into
+    /// 40*8*FLOOR(Y/8) which is the same as (32+8)* (Y and remove last three bits)
+    /// which ends up being (4+1)*Y_with_three bits removed
+    /// which is split into a temp variable... and summed in the last line
     tmpY = (y & 0xf8) << 3;
     ad = 0x2000+tmpY + (tmpY << 2) + (y & 7)+ (x&(0xfff8));
 }
