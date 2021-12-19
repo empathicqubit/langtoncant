@@ -10,6 +10,8 @@ disk/
 
 *.o
 *.pet
+*.mp4
+*.avi
 *.prg
 *.d81
 *.c64
