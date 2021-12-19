@@ -37,12 +37,12 @@ BYTE isPositionWhite() {
 // https://archive.org/details/The_Graphics_Book_for_the_Commodore_64/page/n129/
 void setPositionWhite() {
     // TODO this 8 times something divided must be just masking
-    ad = 0x2000+(320 * (y >> 3)) + (y & 7)+8 * (x>>3);
+    ad = 0x2000+(320 * (y >> 3)) + (y & 7)+(x&(0xfff8));
     *(short*)(ad) = *(short*)(ad) | 1 << ((7-(x & 7)));
 }
 
 void setPositionBlack() {
-    ad = 0x2000+320 * (y >> 3) + (y & 7)+8 * (x>>3);
+    ad = 0x2000+320 * (y >> 3) + (y & 7)+ (x&(0xfff8));
     *(short*)(ad) = (*(short*)(ad)) & ~(1 << ((7-(x & 7))));
 }
 
@@ -74,7 +74,7 @@ int main(void) {
     printf("Please wait for ant ...\n");
     for (i = 0;i<12;i++) { printf("\n"); }
     setAndClearHiRes();
-    x = 160;
+    x = 300;
     y = 100;
     direction = 0;
     while(x > 0 && x < 320 && y > 0 && y < 200)
