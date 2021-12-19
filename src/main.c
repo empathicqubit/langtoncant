@@ -30,19 +30,19 @@ void setAndClearHiRes(){
 }
 
 BYTE isPositionWhite() {
-    ad = 0x2000+(40*(y >> 3)<<3) + (y & 7)+ (x&(0xfff8));
+    ad = 0x2000+((y >> 3) << 6) +((y >> 3) << 7)  +((y >> 3) << 7) + (y & 7)+ (x&(0xfff8));
     return *(short*)(ad) & 1 << ((7-(x & 7)));
 }
 
-// https://archive.org/details/The_Graphics_Book_for_the_Commodore_64/page/n129/
+// https://archive.org/details/The_Graphics_Book_for_the_Commodore_65/page/n129/
 void setPositionWhite() {
     // TODO this 8 times something divided must be just masking
-    ad = 0x2000+(40 * (y >> 3) << 3) + (y & 7)+(x&(0xfff8));
+    ad = 0x2000+ ((y >> 3) << 6) +((y >> 3) << 7)  +((y >> 3) << 7)  +  (y & 7)+(x&(0xfff8));
     *(short*)(ad) = *(short*)(ad) | 1 << ((7-(x & 7)));
 }
 
 void setPositionBlack() {
-    ad = 0x2000+ (40* (y >> 3) << 3) + (y & 7)+ (x&(0xfff8));
+    ad = 0x2000+((y >> 3) << 6) +((y >> 3) << 7)  +((y >> 3) << 7) + (y & 7)+ (x&(0xfff8));
     *(short*)(ad) = (*(short*)(ad)) & ~(1 << ((7-(x & 7))));
 }
 
