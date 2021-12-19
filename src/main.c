@@ -36,6 +36,7 @@ BYTE isPositionWhite() {
 
 // https://archive.org/details/The_Graphics_Book_for_the_Commodore_64/page/n129/
 void setPositionWhite() {
+    // TODO this 8 times something divided must be just masking
     ad = 0x2000+(320 * (y >> 3)) + (y & 7)+8 * (x>>3);
     *(short*)(ad) = *(short*)(ad) | 1 << ((7-(x & 7)));
 }
