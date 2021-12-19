@@ -6,6 +6,7 @@ short x;
 BYTE y;
 BYTE direction; 
 short ad;
+short tmpY;
 
 void setHiRes() {
     *(BYTE*)0xd011 = *(BYTE*)0xd011 | 0xb0 ; // Graphics on
@@ -30,7 +31,8 @@ void setAndClearHiRes(){
 }
 
 void calcAdress(){
-    ad = 0x2000+((y & 0xf8) << 3) +((y & 0xf8) << 4)  +((y & 0xf8) << 4) + (y & 7)+ (x&(0xfff8));
+    tmpY = (y & 0xf8) << 3;
+    ad = 0x2000+tmpY + (tmpY << 2) + (y & 7)+ (x&(0xfff8));
 }
 
 BYTE isPositionWhite() {
