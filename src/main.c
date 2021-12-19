@@ -29,20 +29,23 @@ void setAndClearHiRes(){
     setHiRes();
 }
 
+void calcAdress(){
+    ad = 0x2000+((y & 0xf8) << 3) +((y & 0xf8) << 4)  +((y & 0xf8) << 4) + (y & 7)+ (x&(0xfff8));
+}
+
 BYTE isPositionWhite() {
-    ad = 0x2000+((y >> 3) << 6) +((y >> 3) << 7)  +((y >> 3) << 7) + (y & 7)+ (x&(0xfff8));
+    calcAdress();
     return *(short*)(ad) & 1 << ((7-(x & 7)));
 }
 
 // https://archive.org/details/The_Graphics_Book_for_the_Commodore_65/page/n129/
 void setPositionWhite() {
-    ad = 0x2000+ ((y >> 3) << 6) +((y >> 3) << 7)  +((y >> 3) << 7)  +  (y & 7)+(x&(0xfff8));
+    calcAdress();
     *(short*)(ad) = *(short*)(ad) | 1 << ((7-(x & 7)));
 }
 
 void setPositionBlack() {
-    // TODO is it faster to somehow reuse y >> 3 than do it many times, and maybe add the same result twice...  
-    ad = 0x2000+((y >> 3) << 6) +((y >> 3) << 7)  +((y >> 3) << 7) + (y & 7)+ (x&(0xfff8));
+    calcAdress();
     *(short*)(ad) = (*(short*)(ad)) & ~(1 << ((7-(x & 7))));
 }
 
